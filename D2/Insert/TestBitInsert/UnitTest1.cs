@@ -10,9 +10,9 @@ namespace TestBitInsert
         [TestMethod]
         public void TestMethod1()
         {
-            int expected = 81;
-            int actual = InsertNumber.Insert(33,5,3,7);
-           Assert.AreEqual(expected, actual);
+            int expected = 15;
+            int actual = InsertNumber.Insert(9, 3, 1, 2);
+            Assert.AreEqual(expected, actual);
         }
     }
 }

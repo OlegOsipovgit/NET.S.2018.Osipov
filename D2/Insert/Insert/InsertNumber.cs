@@ -12,11 +12,19 @@ namespace BitInsert
      
         public static int Insert(int numberSource, int numberIn, int i, int j)
         {
-            numberIn = numberIn << i;
-            int a = int.MaxValue << i;
-            int b = a | numberSource;
-            int c = numberIn & b;
-            return c;
+            ///<summary>
+            ///logic of Insert Method
+            /// </summary>
+            int numberInLeft = numberIn >> j+2;
+            numberInLeft= numberInLeft << j+2;
+            int numberInRight = numberIn << 30 - i;
+            numberInRight=numberInRight >> 30 - i;
+            int number = numberInLeft | numberInRight;
+
+            numberSource = numberSource << i;
+            int numberResult = number | numberSource;
+            
+            return numberResult;
   
             }
         }

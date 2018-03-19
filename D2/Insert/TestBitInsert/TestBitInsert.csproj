@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2B6930F0-8CC0-4C5D-9971-EA2322E56D8F}</ProjectGuid>
+    <ProjectGuid>{B4FA5060-A350-405A-86D0-6BE7F287FC6D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestBitInsert</RootNamespace>
