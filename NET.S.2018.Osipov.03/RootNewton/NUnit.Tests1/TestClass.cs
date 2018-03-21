@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RootNewton;
-namespace NUnit.TestRootNewton
+namespace RootNewton
 {
     [TestFixture]
     public class TestClass
@@ -23,11 +23,11 @@ namespace NUnit.TestRootNewton
         [TestCase(8, 15, -7, -5)]
         [TestCase(8, 15, -0.6, -0.1)]
 
-        public void Root(double Number, double degree, double epsilon, double exp)
+        public void Root(double Number, double degree, double epsilon, double ExpectedResult)
         {
             double actual = NewtonMethodClass.Newton(Number, degree, epsilon);
 
-            Assert.AreEqual(exp, actual, 1);
+            Assert.AreEqual(ExpectedResult, actual, 1);
 
         }
     }
