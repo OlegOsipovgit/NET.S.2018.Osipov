@@ -10,7 +10,7 @@ namespace ClosestBigNumber
     {
 
         /// <summary>
-        /// logic of searching the closest number
+        ///number is our assigned number
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
