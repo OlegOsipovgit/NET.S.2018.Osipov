@@ -14,7 +14,7 @@ namespace ConvertToBinary
         /// <param name="number"></param>
         /// <returns></returns>
 
-        public static double ConvertToBinaryExtension(this double number)
+        public static List <int> ConvertToBinaryExtension(this double number)
         {
 
             int integralofNumber = (int)Math.Floor(number);
@@ -45,7 +45,7 @@ namespace ConvertToBinary
             result.AddRange(fractionListofbinary);
             result.AddRange(integralListofbinary);
 
-            return temp1 ;
+            return result;
         }
               
         /// <summary>
