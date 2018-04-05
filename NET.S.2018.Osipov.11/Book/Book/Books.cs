@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Book
 {
-    public class Books
+    public class Books:IComparable<Books>
     {
         #region Properties
 
@@ -62,11 +62,32 @@ namespace Book
             return (ISBN+Author+Name+Publisher+Year+Pagesquantity.ToString()+Price.ToString());
         }
 
-        #endregion
-
-
-
+        public int CompareTo(Books other)
+        {
+            if (other == null) return 1;
+            int result = string.Compare(ISBN, other.ISBN);
+            if (result != 0) return result;
+            result = string.Compare(Author,other.Author);
+            if (result != 0) return result;
+            result = string.Compare(Name, other.Name);
+            if (result != 0) return result;
+            result = string.Compare(Publisher, other.Publisher);
+            if (result != 0) return result;
+            result=ISBN.CompareTo(other.ISBN);
+            if (result != 0) return result;
+            result = Year.CompareTo(other.Year);
+            if (result != 0) return result;
+            result = Pagesquantity.CompareTo(other.Pagesquantity);
+            if (result != 0) return result;
+            return Price.CompareTo(other.Price);
+           
+         }
 
 
     }
+
+    
+
+
 }
+
