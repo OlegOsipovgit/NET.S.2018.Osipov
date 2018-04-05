@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Book
 {
-    public class Book
+    public class Books
     {
         #region Properties
 
@@ -28,7 +28,7 @@ namespace Book
         }
         #endregion
         #region Constructors
-        public Book(string ISBN, string author, string name,string publisher,int year, int pagesquantity, decimal price)
+        public Books(string ISBN, string author, string name,string publisher,int year, int pagesquantity, decimal price)
         {
             this.ISBN = ISBN;
             Author = author;
@@ -46,7 +46,7 @@ namespace Book
             if (ReferenceEquals(this, otherbook)) return true;
             if (ReferenceEquals(otherbook, null)) return false;
             if (otherbook.GetType() != this.GetType()) return false;
-            Book newotherbook = otherbook as Book;
+            Books newotherbook = otherbook as Books;
             if (this.ISBN == newotherbook.ISBN && this.Author == newotherbook.Author && this.Name == newotherbook.Name && this.Publisher == newotherbook.Publisher && this.Pagesquantity == newotherbook.Pagesquantity && this.Price == newotherbook.Price) return true;
             else return false;
         }
