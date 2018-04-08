@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Book
 {
-    public class Books:IComparable<Books>
+    public class Books:IComparable<Books>, IComparable, IEquatable<Books>, IFormattable
     {
         #region Properties
 
@@ -50,7 +51,13 @@ namespace Book
             if (this.ISBN == newotherbook.ISBN && this.Author == newotherbook.Author && this.Name == newotherbook.Name && this.Publisher == newotherbook.Publisher && this.Pagesquantity == newotherbook.Pagesquantity && this.Price == newotherbook.Price) return true;
             else return false;
         }
-
+        public bool Equals(Books otherbook)
+        {
+            if (ReferenceEquals(this, otherbook)) return true;
+            if (ReferenceEquals(otherbook, null)) return false;
+            if (this.ISBN == otherbook.ISBN && this.Author == otherbook.Author && this.Name == otherbook.Name && this.Publisher == otherbook.Publisher && this.Pagesquantity == otherbook.Pagesquantity && this.Price == otherbook.Price) return true;
+            else return false;
+        }
         public override int GetHashCode()
         {
             return this.ISBN.GetHashCode();
@@ -62,31 +69,54 @@ namespace Book
             return (ISBN+Author+Name+Publisher+Year+Pagesquantity.ToString()+Price.ToString());
         }
 
-        public int CompareTo(Books other)
+        public int CompareTo(Books otherbook)
         {
-            if (other == null) return 1;
-            int result = string.Compare(ISBN, other.ISBN);
-            if (result != 0) return result;
-            result = string.Compare(Author,other.Author);
-            if (result != 0) return result;
-            result = string.Compare(Name, other.Name);
-            if (result != 0) return result;
-            result = string.Compare(Publisher, other.Publisher);
-            if (result != 0) return result;
-            result=ISBN.CompareTo(other.ISBN);
-            if (result != 0) return result;
-            result = Year.CompareTo(other.Year);
-            if (result != 0) return result;
-            result = Pagesquantity.CompareTo(other.Pagesquantity);
-            if (result != 0) return result;
-            return Price.CompareTo(other.Price);
-           
-         }
+            if (ReferenceEquals(this, otherbook))
+            {
+                return 0;
+            }
+            return this.ISBN.CompareTo(otherbook.ISBN);
 
+        }
+        public int CompareTo(object otherbook)
+        {
+            if (otherbook == null) return 1;
+            Books book = otherbook as Books;
+            if (book != null)
+                return this.ISBN.CompareTo(book.ISBN);
+            else return this.Name.CompareTo(book.Name);
+        }
+
+        #endregion
+        #region Iformattable
+        public string ToString(string format, IFormatProvider provider)
+        {
+            if (String.IsNullOrEmpty(format)) format = "G";
+            if (provider == null) provider = CultureInfo.CurrentCulture;
+
+            switch (format.ToUpperInvariant())
+            {
+            
+                case "AN":
+                    return $"AuthorName: {Author}, Title: {Name}";
+                case "ANPY":
+                    return $"AuthorName: {Author}, Title: {Name}, Publisher: {Publisher}, Year: {Year.ToString(provider)}";
+                case "IANPYP":
+                    return $"ISBN 13: {ISBN}, AuthorName: {Author}, Title: {Name}, Publisher: {Publisher}, Year: {Year.ToString(provider)}, Price: {Price.ToString(provider)}";
+                case "ANPP":
+                    return $"AuthorName: {Author}, Title: {Name}, Publisher: {Publisher}, Price: {Price.ToString(provider)}";
+                case "G":
+                    return $"ISBN 13: {ISBN}, AuthorName: {Author}, Title: {Name}, Publisher: {Publisher}, Year: {Year.ToString(provider)}, Number of pages: {Pagesquantity.ToString(provider)}, Price: {Price.ToString(provider)}";
+                        
+            default:
+                    throw new FormatException(String.Format("The {0} format string is not supported.", format));
+            }
+        }
+        #endregion
 
     }
 
-    
+
 
 
 }

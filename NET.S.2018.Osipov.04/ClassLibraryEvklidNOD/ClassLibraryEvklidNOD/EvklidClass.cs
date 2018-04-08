@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace EvklidNOD
 {
     public class EvklidClass
     {
+        #region Methods
         /// <summary>
         ///NODofElementsEvklid method receives the massive (Numbers) of elements that greatest common divider will be serched
         ///by NOD method
@@ -21,7 +23,7 @@ namespace EvklidNOD
             int i=0;
             int number = Numbers[0];
             for (i = 0; i < Numbers.Length - 1; i++)
-                number = NOD(number, Numbers[i + 1]);
+                number = delNod.Invoke(number, Numbers[i + 1]);
             return number;
         }
         /// <summary>
@@ -46,14 +48,14 @@ namespace EvklidNOD
         /// </summary>
         /// <param name="Numbers"></param>
         /// <returns></returns>
-        public static uint NODofElementsStein(params uint[] Numbers)
+        public static int NODofElementsStein(params int[] Numbers)
         {
             if (Numbers.Length == 0) return 0;
             Array.Sort(Numbers);
             int i = 0;
-            uint number = Numbers[0];
+            int number = Numbers[0];
             for (i = 0; i < Numbers.Length - 1; i++)
-                number = Stein(number, Numbers[i + 1]);
+                number = delStein.Invoke(number, Numbers[i + 1]);
             return number;
         }
         /// <summary>
@@ -62,7 +64,7 @@ namespace EvklidNOD
         /// <param name="number1"></param>
         /// <param name="number2"></param>
         /// <returns></returns>
-        public static uint Stein(uint number1, uint number2)
+        public static int Stein(int number1, int number2)
         {
             if (number1 == 0) return number2;
             if (number2 == 0) return number1;
@@ -81,7 +83,12 @@ namespace EvklidNOD
             else
                 return Stein(number1, (number2 - number1) >> 1);
         }
-
+        #endregion
+        #region Delegates
+        delegate int GCD(int value1, int value2);
+        static GCD delNod = new GCD(NOD);
+        static GCD delStein = new GCD(Stein);
+        #endregion
 
     }
 }
