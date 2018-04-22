@@ -30,6 +30,10 @@ namespace Matrixes
                     Matrix[i, j] = (T)temp;
                 }
         }
+        public virtual void Changeelement(int row, int column, T newelement)
+        {
+            Matrix[row, column] = newelement;
+        }
     }
     public class SymmetricMatrix<T>:SquareMatrix<T>
     {
@@ -48,7 +52,11 @@ namespace Matrixes
                     Matrix[i, j] = Matrix[j, i];
                 }
         }
-
+        public override void Changeelement(int row, int column, T newelement)
+        {
+            Matrix[row, column] = newelement;
+            Matrix[column, row] = newelement;
+        }
     }
     public class DiagonalMatrix<T> : SquareMatrix<T>
     {
@@ -70,6 +78,11 @@ namespace Matrixes
                         Matrix[i, j] = Matrix[j, i];
                     }
                 }
+        }
+        public override void Changeelement(int row, int column, T newelement)
+        {
+            if (row != column) throw new Exception("Forbidden operation for diagonal matrix");
+            else Matrix[row, column] = newelement;
         }
     }
 
