@@ -8,6 +8,8 @@ namespace Matrixes
 {
     public class SquareMatrix<T>
     {
+        public delegate void ChangeElementHandler(object sender, EventArgs e);
+        public event ChangeElementHandler ElementChanged;
         public int Order { get; set; } 
         public T[,] Matrix
         {
@@ -33,7 +35,13 @@ namespace Matrixes
         public virtual void Changeelement(int row, int column, T newelement)
         {
             Matrix[row, column] = newelement;
+            if (ElementChanged != null)
+            {
+                string tmp = $"Element[{row}{column}] has changed";
+                ElementChanged(this, new EventArgs(tmp,row,column));
+            }
         }
+       
     }
     public class SymmetricMatrix<T>:SquareMatrix<T>
     {
@@ -85,5 +93,28 @@ namespace Matrixes
             else Matrix[row, column] = newelement;
         }
     }
+    public class EventArgs
+    {
+        public string Message { get; }
+        int Row { get; }
+        int Column { get; }
+        public EventArgs(string message, int row, int column)
+        {
+            Message = message;
+            Row = row;
+            Column = column;
+        }
+    }
+    /// <summary>
+    /// Program class saves the handler for all events
+    /// </summary>
+    static class Program
+    {
+         public static void Show_Message(object sender, EventArgs e)
+    {
+        Console.WriteLine(e.Message);
+    }
+}
+    
 
 }
