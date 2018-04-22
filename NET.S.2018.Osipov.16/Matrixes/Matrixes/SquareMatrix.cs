@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace Matrixes
 {
+    #region public classes
+    /// <summary>
+    /// Square Matrix class(the base class)
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class SquareMatrix<T>
     {
+        #region Public fields
         public delegate void ChangeElementHandler(object sender, EventArgs e);
         public event ChangeElementHandler ElementChanged;
         public int Order { get; set; }
@@ -21,7 +27,8 @@ namespace Matrixes
             Matrix = new T[orderofmatrix, orderofmatrix];
             Order = orderofmatrix;
         }
-
+        #endregion
+        #region Methods
         public virtual void Fill()
         {
             for (int i = 0; i < Order; i++)
@@ -32,10 +39,21 @@ namespace Matrixes
                     Matrix[i, j] = (T)temp;
                 }
         }
+        /// <summary>
+        /// event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Show_Message(object sender, EventArgs e)
         {
             Console.WriteLine(e.Message);
         }
+        /// <summary>
+        /// Method for change someelement of square matrix
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <param name="newelement"></param>
         public virtual void Changeelement(int row, int column, T newelement)
         {
             Matrix[row, column] = newelement;
@@ -58,8 +76,12 @@ namespace Matrixes
         {
             ElementChanged(this, new EventArgs(tmp, row, column));
         }
-
+        #endregion
     }
+    /// <summary>
+    /// Class for symmetric matrix, the base class is SquareMatrix
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class SymmetricMatrix<T>:SquareMatrix<T>
     {
         public SymmetricMatrix(int orderofmatrix):base(orderofmatrix)
@@ -88,6 +110,10 @@ namespace Matrixes
                             
         }
     }
+    /// <summary>
+    /// Class for diagonal matrix, the base class is Square matrix.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class DiagonalMatrix<T> : SquareMatrix<T>
     {
         public DiagonalMatrix(int orderofmatrix) : base(orderofmatrix)
@@ -134,8 +160,8 @@ namespace Matrixes
             Column = column;
         }
     }
-    
+    #endregion
 }
-    
 
-}
+
+
