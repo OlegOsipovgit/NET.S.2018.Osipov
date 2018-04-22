@@ -32,14 +32,20 @@ namespace Matrixes
                     Matrix[i, j] = (T)temp;
                 }
         }
+        public void Show_Message(object sender, EventArgs e)
+        {
+            Console.WriteLine(e.Message);
+        }
         public virtual void Changeelement(int row, int column, T newelement)
         {
             Matrix[row, column] = newelement;
+            ElementChanged += Show_Message;
             if (ElementChanged != null)
             {
                 string tmp = $"Element[{row}{column}] has changed";
                 ElementChanged(this, new EventArgs(tmp,row,column));
             }
+            ElementChanged -= Show_Message;
         }
        
     }
@@ -64,6 +70,11 @@ namespace Matrixes
         {
             Matrix[row, column] = newelement;
             Matrix[column, row] = newelement;
+            if (ElementChanged != null)
+            {
+                string tmp = $"Element[{row}{column}] has changed";
+                ElementChanged(this, new EventArgs(tmp,row,column));
+            }
         }
     }
     public class DiagonalMatrix<T> : SquareMatrix<T>
@@ -105,15 +116,7 @@ namespace Matrixes
             Column = column;
         }
     }
-    /// <summary>
-    /// Program class saves the handler for all events
-    /// </summary>
-    static class Program
-    {
-         public static void Show_Message(object sender, EventArgs e)
-    {
-        Console.WriteLine(e.Message);
-    }
+    
 }
     
 
