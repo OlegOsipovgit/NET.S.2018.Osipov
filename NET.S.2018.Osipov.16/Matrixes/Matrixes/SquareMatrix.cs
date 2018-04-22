@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Matrixes
 {
-    #region public classes
+    #region Classes
     /// <summary>
     /// Square Matrix class(the base class)
     /// </summary>
@@ -29,6 +29,9 @@ namespace Matrixes
         }
         #endregion
         #region Methods
+        /// <summary>
+        /// Method of square matrix filling
+        /// </summary>
         public virtual void Fill()
         {
             for (int i = 0; i < Order; i++)
@@ -40,7 +43,7 @@ namespace Matrixes
                 }
         }
         /// <summary>
-        /// event handler
+        /// Event handler
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -49,7 +52,7 @@ namespace Matrixes
             Console.WriteLine(e.Message);
         }
         /// <summary>
-        /// Method for change someelement of square matrix
+        /// Method for change of some element of square matrix
         /// </summary>
         /// <param name="row"></param>
         /// <param name="column"></param>
@@ -66,7 +69,7 @@ namespace Matrixes
             ElementChanged -= Show_Message;
         }
         /// <summary>
-        /// for calling of ElementChanged event in inheritable classes, becouse this event isnt called in inheritable classes
+        /// Method for calling of ElementChanged event in inheritable classes, becouse this event isnt called in inheritable classes
         /// </summary>
         /// <param name="row"></param>
         /// <param name="column"></param>
@@ -84,10 +87,16 @@ namespace Matrixes
     /// <typeparam name="T"></typeparam>
     public class SymmetricMatrix<T>:SquareMatrix<T>
     {
+        #region Public fields
         public SymmetricMatrix(int orderofmatrix):base(orderofmatrix)
         {
            
         }
+        #endregion
+        #region Methods
+        /// <summary>
+        /// Method of symmetric matrix filling
+        /// </summary>
         public override void Fill()
         {
             for (int i = 0; i < Order; i++)
@@ -99,6 +108,12 @@ namespace Matrixes
                     Matrix[i, j] = Matrix[j, i];
                 }
         }
+        /// <summary>
+        ///Method for change of some element of symmetric matrix 
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <param name="newelement"></param>
         public override void Changeelement(int row, int column, T newelement)
         {
             Matrix[row, column] = newelement;
@@ -109,6 +124,7 @@ namespace Matrixes
             ElementChanged -= Show_Message;
                             
         }
+        #endregion
     }
     /// <summary>
     /// Class for diagonal matrix, the base class is Square matrix.
@@ -116,10 +132,16 @@ namespace Matrixes
     /// <typeparam name="T"></typeparam>
     public class DiagonalMatrix<T> : SquareMatrix<T>
     {
+        #region Public fields
         public DiagonalMatrix(int orderofmatrix) : base(orderofmatrix)
         {
 
         }
+        #endregion
+        #region Methods
+        /// <summary>
+        /// Method for diagonal matrix filling
+        /// </summary>
         public override void Fill()
         {
             for (int i = 0; i < Order; i++)
@@ -135,6 +157,12 @@ namespace Matrixes
                     }
                 }
         }
+        /// <summary>
+        /// Method for changing of some element of diagonal matrix
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <param name="newelement"></param>
         public override void Changeelement(int row, int column, T newelement)
         {
             if (row != column) throw new Exception("Forbidden operation for diagonal matrix");
@@ -144,12 +172,14 @@ namespace Matrixes
             Callevent(row, column, newelement, tmp);
             ElementChanged -= Show_Message;
         }
+        #endregion
     }
     /// <summary>
     /// Contains all data of event. Some field of the object of this class can be send to the event handler(Message in our case). 
     /// </summary>
     public class EventArgs
     {
+        #region Public fields
         public string Message { get; }
         int Row { get; }
         int Column { get; }
@@ -159,6 +189,7 @@ namespace Matrixes
             Row = row;
             Column = column;
         }
+        #endregion
     }
     #endregion
 }
