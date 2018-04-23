@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace Task1.Solution
 {
-    public class SqlRepository:IRepository
+    interface IRepository
     {
-        public void Create(string password)
-        {
-            
-        }
+       void Create(string password);
     }
 }

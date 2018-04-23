@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Task1.Solution
 {
-    public class SqlRepository:IRepository
+    public interface IValidate
     {
-        public void Create(string password)
-        {
-            
-        }
+        Tuple<bool, string> VerifyPassword(string password);
+        
     }
 }
