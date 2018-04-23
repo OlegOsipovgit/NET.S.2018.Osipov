@@ -6,33 +6,26 @@ using System.Threading.Tasks;
 
 namespace Task3
 {
-    public class Broker : IObserver
+    public class Broker
     {
-        private IObservable stock;
+        public Stock Stock { get; set; }
 
         public string Name { get; set; }
 
-        public Broker(string name, IObservable observable)
+        public Broker(string name, Stock stock)
         {
             this.Name = name;
-            stock = observable;
-            stock.Register(this);
+            Stock = stock;
+            Stock.changedStocks+=Update;
         }
 
-        public void Update(object info)
+        public void Update(object info, StockEvent newinfo)
         {
-            StockInfo sInfo = (StockInfo)info;
-
-            if (sInfo.USD > 30)
-                Console.WriteLine("Брокер {0} продает доллары;  Курс доллара: {1}", this.Name, sInfo.USD);
+           
+            if (newinfo.USD > 30)
+                Console.WriteLine("Брокер {0} продает доллары;  Курс доллара: {1}", this.Name, newinfo.USD);
             else
-                Console.WriteLine("Брокер {0} покупает доллары;  Курс доллара: {1}", this.Name, sInfo.USD);
-        }
-
-        public void StopTrade()
-        {
-            stock.Unregister(this);
-            stock = null;
+                Console.WriteLine("Брокер {0} покупает доллары;  Курс доллара: {1}", this.Name, newinfo.USD);
         }
     }
 }

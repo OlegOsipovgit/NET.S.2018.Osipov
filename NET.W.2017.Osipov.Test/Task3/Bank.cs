@@ -6,27 +6,27 @@ using System.Threading.Tasks;
 
 namespace Task3
 {
-    public class Bank : IObserver
+    public class Bank 
     {
-        private IObservable stock;
+        public Stock Stock { get; set; }
 
         public string Name { get; set; }
 
-        public Bank(string name, IObservable observable)
+        public Bank(string name, Stock stock)
         {
             this.Name = name;
-            stock = observable;
-            stock.Register(this);
+            Stock = stock;
+            stock.changedStocks += Update;
         }
 
-        public void Update(object info)
+        public void Update(object info, StockEvent e)
         {
-            StockInfo sInfo = (StockInfo)info;
+            
 
-            if (sInfo.Euro > 40)
-                Console.WriteLine("Банк {0} продает евро;  Курс евро: {1}", this.Name, sInfo.Euro);
+            if (e.Euro > 40)
+                Console.WriteLine("Банк {0} продает евро;  Курс евро: {1}", this.Name, e.Euro);
             else
-                Console.WriteLine("Банк {0} покупает евро;  Курс евро: {1}", this.Name, sInfo.Euro);
+                Console.WriteLine("Банк {0} покупает евро;  Курс евро: {1}", this.Name, e.Euro);
         }
     }
 }
