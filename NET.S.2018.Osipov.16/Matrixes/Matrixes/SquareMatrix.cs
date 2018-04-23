@@ -79,6 +79,21 @@ namespace Matrixes
         {
             ElementChanged(this, new EventArgs(tmp, row, column));
         }
+       /* public T[,] SumofMatrix<T>(T[,] matrix1, T[,] matrix2)
+        {
+            int order = matrix1.GetLength(0);
+            T[,] resultMatrix = new T[order, order];
+            if (Type.GetTypeCode(matrix1.GetType()) == TypeCode.String)
+            {
+                for (int i = 0; i < order; i++)
+                    for (int j = 0; j < order; j++)
+                        resultMatrix[i, j] = Concatination(matrix1[i, j], matrix2[i, j]);
+             }
+        }
+        public string Concatination<T>(T a, T b)
+        {
+            return String.Concat(a, b);
+        }*/
         #endregion
     }
     /// <summary>
