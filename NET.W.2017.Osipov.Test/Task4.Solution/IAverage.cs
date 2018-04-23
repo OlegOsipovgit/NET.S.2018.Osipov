@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task3
+namespace Task4.Solution
 {
-    public class StockInfo
+    public interface IAverage
     {
-        public int USD { get; set; }
-        public int Euro { get; set; }
+        double Average(List<double> a);
     }
 }
