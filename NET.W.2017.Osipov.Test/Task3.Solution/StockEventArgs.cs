@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Task3
 {
-    public class StockEvent:EventArgs
+    public class StockEventArgs : EventArgs
     {
         public int USD { get; set; }
         public int Euro { get; set; }
-        public StockEvent(int usd, int euro)
+        public StockEventArgs(int usd, int euro)
         {
             USD = usd;
             Euro = euro;
         }
-        public StockEvent()
+        public StockEventArgs()
         {
         }
     }

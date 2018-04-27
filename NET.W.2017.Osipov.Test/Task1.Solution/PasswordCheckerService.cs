@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task1.Solution
 {
-    class PasswordCheckerService : IValidate
+    public class PasswordCheckerService : IValidate
     {
         SqlRepository repository = new SqlRepository();
 

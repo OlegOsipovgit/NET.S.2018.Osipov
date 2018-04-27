@@ -9,7 +9,7 @@ namespace Task3
     public class Stock
     {
 
-        public event EventHandler<StockEventArgs> changedStocks = delegate { };
+        public event EventHandler<StockEventArgs> changedStocks;
 
         public void Market()
         {

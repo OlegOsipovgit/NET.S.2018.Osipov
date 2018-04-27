@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task3
 {
-    public class Bank 
+    public class Bank
     {
         public Stock Stock { get; set; }
 
@@ -21,7 +21,7 @@ namespace Task3
 
         public void Update(object info, StockEventArgs e)
         {
-            
+
 
             if (e.Euro > 40)
                 Console.WriteLine("Банк {0} продает евро;  Курс евро: {1}", this.Name, e.Euro);

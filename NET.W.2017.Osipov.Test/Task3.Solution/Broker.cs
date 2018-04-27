@@ -16,16 +16,20 @@ namespace Task3
         {
             this.Name = name;
             Stock = stock;
-            Stock.changedStocks+=Update;
+            Stock.changedStocks += Update;
         }
 
         public void Update(object info, StockEventArgs newinfo)
         {
-           
+
             if (newinfo.USD > 30)
                 Console.WriteLine("Брокер {0} продает доллары;  Курс доллара: {1}", this.Name, newinfo.USD);
             else
                 Console.WriteLine("Брокер {0} покупает доллары;  Курс доллара: {1}", this.Name, newinfo.USD);
+        }
+        public void StopTrade()
+        {
+            Stock.changedStocks -= Update;
         }
     }
 }
