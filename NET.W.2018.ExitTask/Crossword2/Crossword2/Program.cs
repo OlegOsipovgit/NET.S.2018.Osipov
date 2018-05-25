@@ -36,6 +36,7 @@ namespace Crossword2
                     {
                         for (int b=0;b<Class1.arrays[c].Length;b++)
                         {
+                            ///проверка совпадения букв из существующего слова в кроссворде и записываемого                           
                             if (crosswordfield[i, j] == Class1.arrays[c][b])
                             {
                                 ///проверка по вертикали
@@ -58,11 +59,13 @@ namespace Crossword2
                                         
                                     }
                                     if (temp > 0) break;
+                                    ///записываем окончание слово в кроссворд по вертикали начиная с общей буквы
                                     for (int n = b; n < Class1.arrays[c].Length; n++)
                                     {
                                         crosswordfield[i, j] = Class1.arrays[c][n];
                                         j++;
                                     }
+                                    ///записываем начало слово в кроссворд по вертикали до общей буквы
                                     for (int n = b - 1; n != 0; n--)
                                     {
                                         crosswordfield[i, j - 1] = Class1.arrays[c][n];
@@ -90,11 +93,13 @@ namespace Crossword2
 
                                     }
                                     if (temp > 0) break;
+                                    ///записываем окончание слово в кроссворд по горизонтали начиная с общей буквы
                                     for (int n = b; n < Class1.arrays[c].Length; n++)
                                     {
                                         crosswordfield[i, j] = Class1.arrays[c][n];
                                         i++;
                                     }
+                                    ///записываем начало слово в кроссворд по горизонтали до общей буквы
                                     for (int n = b - 1; n != 0; n--)
                                     {
                                         crosswordfield[i-1, j] = Class1.arrays[c][n];
